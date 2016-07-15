@@ -1,0 +1,44 @@
+//
+//  Weibo-Prefix.pch
+//  Weibo
+//
+//  Created by yaojinye on 16/7/4.
+//  Copyright (c) 2016年 yaojinye. All rights reserved.
+//
+
+#import "UIImage+Image.h"
+#import "UIBarButtonItem+Create.h"
+#import "UIView+Frame.h"
+
+#define YJYKeyWindow    [UIApplication sharedApplication].keyWindow
+#define YJYScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define YJYScreenHeight [UIScreen mainScreen].bounds.size.height
+
+#define YJYNameFont [UIFont systemFontOfSize:13]
+#define YJYTimeFont [UIFont systemFontOfSize:12]
+#define YJYSourceFont YJYTimeFont
+#define YJYTextFont [UIFont systemFontOfSize:15]
+
+#define YJYAuthorizeBaseUrl @"https://api.weibo.com/oauth2/authorize"
+#define YJYClient_id        @"2756231120"
+#define YJYRedirect_uri     @"http://www.baidu.com"
+#define YJYClient_secret    @"72d8c9609738869fc91af6ed8813c4a6"
+
+
+
+#ifndef Weibo_Weibo_Prefix_pch
+#define Weibo_Weibo_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#ifdef DEBUG
+
+#define WBLog(...) NSLog(__VA_ARGS__)
+
+#else
+
+#define WBLog(...)
+
+#endif
+
+#endif
