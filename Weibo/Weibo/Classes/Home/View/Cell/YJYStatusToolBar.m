@@ -51,13 +51,13 @@
 }
 
 -(void)setupAllChildView{
-    UIButton *retweet = [self setupOneButtonWithImage:[UIImage imageNamed:@"timeline_icon_retweet"] title:@"转发"];
+    UIButton *retweet = [self setupOneButtonWithImage:[UIImage imageNamed:@"timeline_icon_retweet"] title:@"转发" type:YJYStatusToolBarButtonTypeRetweet];
     _retweet = retweet;
     
-    UIButton *comment = [self setupOneButtonWithImage:[UIImage imageNamed:@"timeline_icon_comment"] title:@"评论"];
+    UIButton *comment = [self setupOneButtonWithImage:[UIImage imageNamed:@"timeline_icon_comment"] title:@"评论" type:YJYStatusToolBarButtonTypeComment];
     _comment = comment;
     
-    UIButton *unlink = [self setupOneButtonWithImage:[UIImage imageNamed:@"timeline_icon_unlike"] title:@"赞"];
+    UIButton *unlink = [self setupOneButtonWithImage:[UIImage imageNamed:@"timeline_icon_unlike"] title:@"赞" type:YJYStatusToolBarButtonTypeAttribude];
     _unlink = unlink;
     
     for (int i = 0; i < 2; i++) {
@@ -68,7 +68,7 @@
     
 }
 
--(UIButton *)setupOneButtonWithImage:(UIImage *)image title:(NSString *)title{
+-(UIButton *)setupOneButtonWithImage:(UIImage *)image title:(NSString *)title type:(YJYStatusToolBarButtonType)type{
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:title forState:UIControlStateNormal];
@@ -76,6 +76,8 @@
     [button setImage:image forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:12];
     button.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
+    button.tag = type;
+    [button addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:button];
     [self.btns addObject:button];
@@ -83,6 +85,13 @@
     
     return button;
 }
+
+-(void)btnClicked:(UIButton *)btn{
+    if ([_delegate respondsToSelector:@selector(statusToorBarButonClicked:status:)]) {
+        [_delegate statusToorBarButonClicked:(YJYStatusToolBarButtonType)btn.tag status:self.status];
+    }
+}
+
 
 -(void)layoutSubviews{
     [super layoutSubviews];

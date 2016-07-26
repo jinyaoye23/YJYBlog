@@ -8,11 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    YJYComposeToolBarButtonTypePicture,
+    YJYComposeToolBarButtonTypeTrend,
+    YJYComposeToolBarButtonTypeMentionType,
+    YJYComposeToolBarButtonTypeEmoticon
+}YJYComposeToolBarButtonType;
+
 @class YJYComposeToolBar;
 @protocol YJYComposeToolDelegate <NSObject>
 
 
--(void)composeToolBar:(YJYComposeToolBar *)toolBar btnClickedIndex:(NSInteger)index;
+-(void)composeToolBar:(YJYComposeToolBar *)toolBar btnClickedIndex:(YJYComposeToolBarButtonType)btnType;
 
 @end
 

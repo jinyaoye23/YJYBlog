@@ -12,10 +12,15 @@
 #import "YJYUser.h"
 #import "NSDate+MJ.h"
 
+
 @implementation YJYStatus
 
 +(NSDictionary *)mj_objectClassInArray{
     return @{@"pic_urls":[YJYPhoto class]};
+}
+
++(NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{@"ID":@"id"};
 }
 
 -(void)setRetweeted_status:(YJYStatus *)retweeted_status{

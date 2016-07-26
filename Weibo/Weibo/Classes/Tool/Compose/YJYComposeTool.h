@@ -12,4 +12,6 @@
 
 +(void)composeWithStatus:(NSString *)status success:(void(^)())success failure:(void(^)(NSError *error))failure;
 
++(void)commentWithID:(NSUInteger)ID  commentText:(NSString *)text success:(void(^)())success failure:(void(^)(NSError *error))failure;
+
 @end

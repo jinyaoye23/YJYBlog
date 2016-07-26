@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>4243C5DC-D5A4-4B39-8802-366675F3FD24</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Weibo</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>540443253F0E54AB46ABD7E20CEEA2AF479219E2</key>
 		<string>https://github.com/jinyaoye23/YJYBlog.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Weibo/Weibo.xcodeproj</string>
+	<string>Weibo/Weibo.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>540443253F0E54AB46ABD7E20CEEA2AF479219E2</key>

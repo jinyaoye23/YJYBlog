@@ -20,6 +20,8 @@
 @interface YJYStatus : NSObject<MJKeyValue>
 //微博创建时间
 @property (nonatomic, copy)NSString *created_at;
+
+@property (nonatomic, assign)NSUInteger ID;
 //字符串型的微博ID
 @property (nonatomic, copy)NSString *idstr;
 //微博信息内容

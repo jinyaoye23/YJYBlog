@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1802C31A1D40D14500ABA53A /* YJYCommentParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 1802C3191D40D14500ABA53A /* YJYCommentParam.m */; };
+		1802C3221D40D3FD00ABA53A /* YJYBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1802C3211D40D3FD00ABA53A /* YJYBaseVC.m */; };
+		1802C3251D40DAEC00ABA53A /* YJYCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1802C3241D40DAEC00ABA53A /* YJYCommentViewController.m */; };
+		1802C3281D40DB0600ABA53A /* YJYCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1802C3271D40DB0600ABA53A /* YJYCommentView.m */; };
 		1805EC361D2BB28300894646 /* YJYTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805EC351D2BB28300894646 /* YJYTitleButton.m */; };
 		1805EC391D2BBE7100894646 /* YJYPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805EC381D2BBE7100894646 /* YJYPopView.m */; };
 		1805EC3C1D2BD7BB00894646 /* YJYPopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805EC3B1D2BD7BB00894646 /* YJYPopViewController.m */; };
@@ -155,6 +159,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1802C3181D40D14500ABA53A /* YJYCommentParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJYCommentParam.h; sourceTree = "<group>"; };
+		1802C3191D40D14500ABA53A /* YJYCommentParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJYCommentParam.m; sourceTree = "<group>"; };
+		1802C3201D40D3FD00ABA53A /* YJYBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJYBaseVC.h; sourceTree = "<group>"; };
+		1802C3211D40D3FD00ABA53A /* YJYBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJYBaseVC.m; sourceTree = "<group>"; };
+		1802C3231D40DAEB00ABA53A /* YJYCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJYCommentViewController.h; sourceTree = "<group>"; };
+		1802C3241D40DAEC00ABA53A /* YJYCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJYCommentViewController.m; sourceTree = "<group>"; };
+		1802C3261D40DB0600ABA53A /* YJYCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJYCommentView.h; sourceTree = "<group>"; };
+		1802C3271D40DB0600ABA53A /* YJYCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJYCommentView.m; sourceTree = "<group>"; };
 		1805EC341D2BB28300894646 /* YJYTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJYTitleButton.h; sourceTree = "<group>"; };
 		1805EC351D2BB28300894646 /* YJYTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJYTitleButton.m; sourceTree = "<group>"; };
 		1805EC371D2BBE7100894646 /* YJYPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJYPopView.h; sourceTree = "<group>"; };
@@ -449,6 +461,59 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1802C3171D40D10200ABA53A /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				1802C3181D40D14500ABA53A /* YJYCommentParam.h */,
+				1802C3191D40D14500ABA53A /* YJYCommentParam.m */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		1802C31B1D40D28B00ABA53A /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				1802C31C1D40D28B00ABA53A /* Controller */,
+				1802C31D1D40D28B00ABA53A /* Model */,
+				1802C31E1D40D28B00ABA53A /* View */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		1802C31C1D40D28B00ABA53A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1802C3231D40DAEB00ABA53A /* YJYCommentViewController.h */,
+				1802C3241D40DAEC00ABA53A /* YJYCommentViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1802C31D1D40D28B00ABA53A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1802C31E1D40D28B00ABA53A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1802C3261D40DB0600ABA53A /* YJYCommentView.h */,
+				1802C3271D40DB0600ABA53A /* YJYCommentView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1802C31F1D40D3DD00ABA53A /* BaseVC */ = {
+			isa = PBXGroup;
+			children = (
+				1802C3201D40D3FD00ABA53A /* YJYBaseVC.h */,
+				1802C3211D40D3FD00ABA53A /* YJYBaseVC.m */,
+			);
+			path = BaseVC;
+			sourceTree = "<group>";
+		};
 		1805EC3D1D2BE1BE00894646 /* OAuth */ = {
 			isa = PBXGroup;
 			children = (
@@ -584,6 +649,8 @@
 		18D6400A1D2ACA7400748BBC /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1802C31F1D40D3DD00ABA53A /* BaseVC */,
+				1802C31B1D40D28B00ABA53A /* Comment */,
 				18EAAEE51D3032590045C0DC /* Compose */,
 				18E7045A1D2C04FB0099010E /* Tool */,
 				1805EC3D1D2BE1BE00894646 /* OAuth */,
@@ -850,6 +917,7 @@
 		18E7045A1D2C04FB0099010E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				1802C3171D40D10200ABA53A /* Comment */,
 				186DEE631D362B8A00E9BB80 /* Status */,
 				18CAC32C1D3396E700E58575 /* Compose */,
 				18ED62FF1D2D19380036323E /* Param */,
@@ -933,8 +1001,8 @@
 		18EAAEE51D3032590045C0DC /* Compose */ = {
 			isa = PBXGroup;
 			children = (
-				18EAAEE61D3032590045C0DC /* Controller */,
 				18EAAEE71D3032590045C0DC /* Model */,
+				18EAAEE61D3032590045C0DC /* Controller */,
 				18EAAEE81D3032590045C0DC /* View */,
 			);
 			path = Compose;
@@ -1478,9 +1546,12 @@
 				18E704891D2C36FB0099010E /* NSObject+MJClass.m in Sources */,
 				18EAAEDA1D301BE10045C0DC /* MJPhotoProgressView.m in Sources */,
 				18EAAEDB1D301BE10045C0DC /* MJPhotoToolbar.m in Sources */,
+				1802C3251D40DAEC00ABA53A /* YJYCommentViewController.m in Sources */,
 				186DEECA1D3641B800E9BB80 /* FMDatabaseAdditions.m in Sources */,
+				1802C31A1D40D14500ABA53A /* YJYCommentParam.m in Sources */,
 				18ED63201D2D8F4B0036323E /* YJYReweetStatus.m in Sources */,
 				18EF04491D2CA9B8004284A0 /* UIButton+WebCache.m in Sources */,
+				1802C3281D40DB0600ABA53A /* YJYCommentView.m in Sources */,
 				18EF04D01D2CAFB4004284A0 /* MJRefreshConst.m in Sources */,
 				18EAAEDD1D301BE10045C0DC /* SDWebImageManager+MJ.m in Sources */,
 				18EAAEDC1D301BE10045C0DC /* MJPhotoView.m in Sources */,
@@ -1525,6 +1596,7 @@
 				1805EC431D2BE1F300894646 /* YJYOAuthViewController.m in Sources */,
 				18E704511D2BF0D70099010E /* AFNetworkReachabilityManager.m in Sources */,
 				186DEEC91D3641B800E9BB80 /* FMDatabase.m in Sources */,
+				1802C3221D40D3FD00ABA53A /* YJYBaseVC.m in Sources */,
 				1805EC4A1D2BE5F200894646 /* MBProgressHUD+MJ.m in Sources */,
 				18D6403E1D2AD9B400748BBC /* YJYNavigationController.m in Sources */,
 				18EF04441D2CA9B8004284A0 /* SDWebImageDecoder.m in Sources */,
@@ -1676,7 +1748,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "/Users/yaojinye/Desktop/abc/Weibo/Weibo/Classes/Other/Weibo-Prefix.pch";
+				GCC_PREFIX_HEADER = "/Users/yaojinye/Desktop/YJYBlog/Weibo/Weibo/Classes/Other/Weibo-Prefix.pch";
 				INFOPLIST_FILE = Weibo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1691,7 +1763,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "/Users/yaojinye/Desktop/abc/Weibo/Weibo/Classes/Other/Weibo-Prefix.pch";
+				GCC_PREFIX_HEADER = "/Users/yaojinye/Desktop/YJYBlog/Weibo/Weibo/Classes/Other/Weibo-Prefix.pch";
 				INFOPLIST_FILE = Weibo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

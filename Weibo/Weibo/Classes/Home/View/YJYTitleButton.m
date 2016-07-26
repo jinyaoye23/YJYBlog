@@ -39,6 +39,7 @@
 }
 
 -(void)setImage:(UIImage *)image forState:(UIControlState)state{
+    
     [super setImage:image forState:state];
     [self sizeToFit];
 }

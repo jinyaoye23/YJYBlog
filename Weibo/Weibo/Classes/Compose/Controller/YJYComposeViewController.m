@@ -40,43 +40,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-
-    [self setupNavigationbar];
-    
+    [self setupNavigation];
     [self setupComposeView];
+
     
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+    self.toolBar.delegate = self;
     [self setupToolBar];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    
     [self setupPhotosView];
 }
 
--(void)setupPhotosView{
-    YJYComposePhotosView *photosView = [[YJYComposePhotosView alloc]initWithFrame:CGRectMake(0, 70, self.view.width, self.view.height - 70)];
-//    photosView.backgroundColor = [UIColor redColor];
-    _photosView = photosView;
-    [_composeView addSubview:photosView];
-    
-}
+-(void)setupNavigation{
 
--(void)keyboardFrameChange:(NSNotification *)note{
-    NSLog(@"%@", note);
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:@"发送" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+    [button addTarget:self action:@selector(compose) forControlEvents:UIControlEventTouchUpInside];
+    [button sizeToFit];
     
-    CGFloat durtion = [note.userInfo[UIKeyboardAnimationCurveUserInfoKey] floatValue];
-    
-    CGRect frame = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    if (frame.origin.y == self.view.height) {
-        [UIView animateWithDuration:durtion animations:^{
-            
-            _toolBar.transform = CGAffineTransformIdentity;
-        }];
-    }else{
-        [UIView animateWithDuration:durtion animations:^{
-            
-            _toolBar.transform = CGAffineTransformMakeTranslation(0, -frame.size.height);
-        }];
-    }
+    UIBarButtonItem *rightItem= [[UIBarButtonItem alloc]initWithCustomView:button];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    _composeBtn = rightItem;
+    _composeBtn.enabled = NO;
 }
 
 -(void)setupToolBar{
@@ -88,6 +75,15 @@
     [self.view addSubview:toolBar];
     
 }
+
+-(void)setupPhotosView{
+    YJYComposePhotosView *photosView = [[YJYComposePhotosView alloc]initWithFrame:CGRectMake(0, 70, self.view.width, self.view.height - 70)];
+    _photosView = photosView;
+    [_composeView addSubview:photosView];
+    
+}
+
+
 
 -(void)setupComposeView{
     YJYComposeView *composeView = [[YJYComposeView alloc]initWithFrame:self.view.bounds];
@@ -108,6 +104,8 @@
     if (_composeView.text.length) {
         _composeView.hidePlaceholder = YES;
         _composeBtn.enabled = YES;
+        
+        
     }else{
         _composeView.hidePlaceholder = NO;
         _composeBtn.enabled = NO;
@@ -121,7 +119,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
     [_composeView becomeFirstResponder];
 }
 
@@ -130,75 +127,50 @@
     [self.view endEditing:YES];
 }
 
--(void)setupNavigationbar{
 
-    self.title = @"发微博";
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:0 target:self action:@selector(dismiss)];
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setTitle:@"发送" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
-    [button addTarget:self action:@selector(compose) forControlEvents:UIControlEventTouchUpInside];
-    [button sizeToFit];
-
-    UIBarButtonItem *rightItem= [[UIBarButtonItem alloc]initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = rightItem;
-    _composeBtn = rightItem;
-    _composeBtn.enabled = NO;
-}
-
-
--(void)composeToolBar:(YJYComposeToolBar *)toolBar btnClickedIndex:(NSInteger)index{
-    if (index == 0) {
+-(void)composeToolBar:(YJYComposeToolBar *)toolBar btnClickedIndex:(YJYComposeToolBarButtonType)type{
+    if (type == YJYComposeToolBarButtonTypePicture) {
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
         
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.delegate = self;
         
         [self presentViewController:imagePicker animated:YES completion:nil];
+    }else if (type == YJYComposeToolBarButtonTypeTrend) {
+        NSLog(@"Trend Button Clicked");
+    }else if (type == YJYComposeToolBarButtonTypeMentionType){
+        NSLog(@"Metion Button Clicked");
     }
+
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
 
     UIImage *image = info[UIImagePickerControllerOriginalImage];
-    
     [self.images addObject:image];
-    
     _photosView.image = image;
-    
-    
-    
     [self dismissViewControllerAnimated:YES completion:nil];
     _composeBtn.enabled = YES;
     
 }
 
 
--(void)dismiss{
-    [self dismissViewControllerAnimated:YES completion:nil];
-
-}
+//-(void)dismiss{
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
 
 -(void)compose{
 
     if (self.images.count) {
-        
         UIImage *image = self.images[0];
-        
         NSString *status = _composeView.text.length? _composeView.text : @"分享图片";
         YJYComposeParam *param = [YJYComposeParam param];
         param.status = status;
-        
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        
         [manager POST:@"https://upload.api.weibo.com/2/statuses/upload.json" parameters:param.mj_keyValues constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             
             NSData *data = UIImagePNGRepresentation(image);
             [formData appendPartWithFileData:data name:@"pic" fileName:@"image.png" mimeType:@"image/png"];
-            
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             [MBProgressHUD showSuccess:@"发送图片成功"];
@@ -211,15 +183,11 @@
         }];
         
     }else{
-        
         [self sendText];
     }
-    
-    
 }
 
 -(void)sendText{
-    
     [YJYComposeTool composeWithStatus:_composeView.text success:^{
         NSLog(@"Compose Success");
         
@@ -230,8 +198,6 @@
         NSLog(@"%@", error);
         [MBProgressHUD showError:@"Failure Compose"];
     }];
-    
-
 }
 
 @end

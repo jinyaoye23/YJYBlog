@@ -8,6 +8,8 @@
 
 #import "YJYComposeToolBar.h"
 
+
+
 @implementation YJYComposeToolBar
 
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -18,11 +20,11 @@
 }
 
 -(void)setupAllChildView{
-    [self setupButtonWithImage:[UIImage imageNamed:@"compose_toolbar_picture"] highImage:[UIImage imageNamed:@"compose_toolbar_picture_selected"] target:self action:@selector(btnClicked:)];
-    [self setupButtonWithImage:[UIImage imageNamed:@"compose_trendbutton_background"] highImage:[UIImage imageNamed:@"compose_trendbutton_background_highlighted"] target:self action:@selector(btnClicked:)];
-    [self setupButtonWithImage:[UIImage imageNamed:@"compose_mentionbutton_background"] highImage:[UIImage imageNamed:@"compose_mentionbutton_background_selected"] target:self action:@selector(btnClicked:)];
-    [self setupButtonWithImage:[UIImage imageNamed:@"compose_toolbar_picture"] highImage:[UIImage imageNamed:@"compose_toolbar_picture_selected"] target:self action:@selector(btnClicked:)];
-    [self setupButtonWithImage:[UIImage imageNamed:@"compose_emoticonbutton_background"] highImage:[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"] target:self action:@selector(btnClicked:)];
+    [self setupButtonWithImage:[UIImage imageNamed:@"compose_toolbar_picture"] highImage:[UIImage imageNamed:@"compose_toolbar_picture_selected"] target:self action:@selector(btnClicked:) type:YJYComposeToolBarButtonTypePicture];
+    [self setupButtonWithImage:[UIImage imageNamed:@"compose_trendbutton_background"] highImage:[UIImage imageNamed:@"compose_trendbutton_background_highlighted"] target:self action:@selector(btnClicked:) type:YJYComposeToolBarButtonTypeTrend];
+    [self setupButtonWithImage:[UIImage imageNamed:@"compose_mentionbutton_background"] highImage:[UIImage imageNamed:@"compose_mentionbutton_background_selected"] target:self action:@selector(btnClicked:) type:YJYComposeToolBarButtonTypeMentionType];
+    [self setupButtonWithImage:[UIImage imageNamed:@"compose_toolbar_picture"] highImage:[UIImage imageNamed:@"compose_toolbar_picture_selected"] target:self action:@selector(btnClicked:) type:YJYComposeToolBarButtonTypePicture];
+    [self setupButtonWithImage:[UIImage imageNamed:@"compose_emoticonbutton_background"] highImage:[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"] target:self action:@selector(btnClicked:) type:YJYComposeToolBarButtonTypeEmoticon];
     
 }
 
@@ -32,14 +34,14 @@
         [_delegate composeToolBar:self btnClickedIndex:btn.tag];
     }
 }
--(void)setupButtonWithImage:(UIImage *)image highImage:(UIImage *)highImage target:(id)target action:(SEL)action{
+-(void)setupButtonWithImage:(UIImage *)image highImage:(UIImage *)highImage target:(id)target action:(SEL)action type:(YJYComposeToolBarButtonType)type{
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setImage:image forState:UIControlStateNormal];
     [btn setImage:highImage forState:UIControlStateHighlighted];
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
-    btn.tag = self.subviews.count;
+    btn.tag = type;
     
     [self addSubview:btn];
 }

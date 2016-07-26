@@ -59,6 +59,7 @@
     YJYStatusToolBar *toolBar = [[YJYStatusToolBar alloc]init];
     [self.contentView addSubview:toolBar];
     _toolBar = toolBar;
+    self.statusTB = toolBar;
     
     
 }

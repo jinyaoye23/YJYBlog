@@ -6,8 +6,8 @@
 //  Copyright (c) 2016年 yaojinye. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "YJYBaseVC.h"
 
-@interface YJYComposeViewController : UIViewController
+@interface YJYComposeViewController : YJYBaseVC
 
 @end

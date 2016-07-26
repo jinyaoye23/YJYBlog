@@ -34,8 +34,11 @@
 #import "UIImageView+WebCache.h"
 #import "MJRefresh.h"
 #import "YJYStatusFrame.h"
+#import "YJYStatusToolBar.h"
+#import "YJYCommentViewController.h"
+#import "YJYNavigationController.h"
 
-@interface YJYHomeViewController ()
+@interface YJYHomeViewController ()<YJYStatusToolBarDelegate>
 
 @property (nonatomic, weak)YJYTitleButton *titleButton;
 @property (nonatomic, retain)YJYPopView *popView;
@@ -171,6 +174,7 @@
         for (YJYStatus *st in newStatuses) {
             YJYStatusFrame *statusFra = [[YJYStatusFrame alloc]init];
             statusFra.status = st;
+            WBLog(@"----%lu", (unsigned long)st.ID);
             [statuesFrames addObject:statusFra];
         }
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, newStatuses.count)];
@@ -191,6 +195,8 @@
             for (YJYStatus *st in statues) {
                 YJYStatusFrame *statusFra = [[YJYStatusFrame alloc]init];
                 statusFra.status = st;
+                WBLog(@"=====%lu", (unsigned long)st.ID);
+
                 [statuesFrames addObject:statusFra];
             }
             NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, statues.count)];
@@ -201,58 +207,6 @@
             
         }];
     }
-
-    
-    
-//    [YJYStatusTool newStatusWithSinceId:sinceId success:^(NSArray *statues) {
-//        
-//        
-//    } failure:^(NSError *error) {
-//        
-//    }];
-    
-
-    
-    
-    
-/*
-     viod(^success)(id) = ^(id responseObject) {
-         [self.tableView.mj_header endRefreshing];
-         //Get The WeiBoData
-         NSArray *dicArr = responseObject[@"statuses"];
-         NSArray *stauses = (NSMutableArray *)[YJYStatus mj_objectArrayWithKeyValuesArray:dicArr];
-         
-         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, stauses.count)];
-         [self.status insertObjects:stauses atIndexes:indexSet];
-         [self.tableView reloadData];
-     };
-     
-*/
-
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    
-//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//    if (self.status.count) {
-//        
-//        params[@"since_id"] = [self.status[0] idstr];
-//    }
-//    params[@"access_token"] = [YJYAccountTool account].access_token;
-//    [manager GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        
-//        [self.tableView.mj_header endRefreshing];
-//        
-//        //Get The WeiBoData
-//        NSArray *dicArr = responseObject[@"statuses"];
-//        NSArray *stauses = (NSMutableArray *)[YJYStatus mj_objectArrayWithKeyValuesArray:dicArr];
-//        
-//        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, stauses.count)];
-//        [self.status insertObjects:stauses atIndexes:indexSet];
-//        [self.tableView reloadData];
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"%@", error);
-//    }];
-    
 }
 -(void)showNewStatusCount:(int)count{
     if (count == 0) return;
@@ -295,8 +249,15 @@
     YJYStatusCell *cell = [YJYStatusCell cellWithTableView:tableView];
     YJYStatusFrame *statusFrame = self.statusFrame[indexPath.row];
     cell.statusFrame = statusFrame;
-//    WBLog(@"%s", __func__);
+    NSLog(@"--%lu---", statusFrame.status.ID);
+    cell.statusTB.delegate = self;
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    YJYStatusFrame *statusFrame = self.statusFrame[indexPath.row];
+    NSLog(@"--%lu---", statusFrame.status.ID);
+
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -337,6 +298,25 @@
     YJYOneViewController *oVc =[[YJYOneViewController alloc]init];
     oVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:oVc animated:YES];
+}
+
+-(void)statusToorBarButonClicked:(YJYStatusToolBarButtonType)type status:(YJYStatus *)status{
+    if (type == YJYStatusToolBarButtonTypeRetweet) {
+        YJYCommentViewController *comment = [[YJYCommentViewController alloc]init];
+        comment.status = status;
+        YJYNavigationController *nav = [[YJYNavigationController alloc]initWithRootViewController:comment];
+        [self presentViewController:nav animated:YES completion:nil];
+    }else if (type == YJYStatusToolBarButtonTypeComment){
+        YJYCommentViewController *comment = [[YJYCommentViewController alloc]init];
+        comment.status = status;
+        YJYNavigationController *nav = [[YJYNavigationController alloc]initWithRootViewController:comment];
+        [self presentViewController:nav animated:YES completion:nil];
+    }else{
+        YJYCommentViewController *comment = [[YJYCommentViewController alloc]init];
+        comment.status = status;
+        YJYNavigationController *nav = [[YJYNavigationController alloc]initWithRootViewController:comment];
+        [self presentViewController:nav animated:YES completion:nil];
+    }
 }
 
 @end

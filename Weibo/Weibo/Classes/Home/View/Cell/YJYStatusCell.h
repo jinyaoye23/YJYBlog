@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class YJYStatusFrame;
-
+@class YJYStatusToolBar;
 @interface YJYStatusCell : UITableViewCell
 
 @property (nonatomic, strong)YJYStatusFrame *statusFrame;
+@property (nonatomic, strong)YJYStatusToolBar *statusTB;
 
 +(instancetype)cellWithTableView:(UITableView *)tableView;
 
